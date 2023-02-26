@@ -5,13 +5,17 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.org.ozod.dto.UserDto;
 import com.org.ozod.dto.UserLoginDto;
+import com.org.ozod.dto.UserResponseDto;
 import com.org.ozod.service.IUserService;
 @CrossOrigin(origins = {"${ui.url}"},maxAge = 3600)
 @RestController
@@ -29,6 +33,16 @@ public class UserController {
 	@PostMapping(value="/login",consumes = {"application/x-www-form-urlencoded","application/json"})
 	public ResponseEntity<?> add(@RequestBody @Valid UserLoginDto user) {
 		return service.findByMobileAndPassword(user);
+	}
+	
+	@GetMapping(value="/find/{id}")
+	public ResponseEntity<?> find(@PathVariable("id") Long id) {
+		return service.findById(id);
+	}
+	
+	@PutMapping(value="/update",consumes = {"application/x-www-form-urlencoded","application/json"})
+	public ResponseEntity<?> add(@RequestBody UserResponseDto user) {
+		return service.update(user);
 	}
 
 }

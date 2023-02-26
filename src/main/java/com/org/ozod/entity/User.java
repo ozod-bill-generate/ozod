@@ -40,6 +40,8 @@ public class User {
 	
 	private String storeName;
 	
+	private String address;
+	
 	@OneToMany(targetEntity = Customer.class, cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "user", orphanRemoval = true)
 	private List<Customer> customers;
 	

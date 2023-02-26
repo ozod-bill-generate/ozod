@@ -52,7 +52,11 @@ public class PDFGenerator {
 			PdfPTable irdTable = new PdfPTable(1);
 			irdTable.setWidthPercentage(100);
 			irdTable.addCell(getIRHInvoiceCell(user.getStoreName(), PdfPCell.ALIGN_CENTER));
-			irdTable.addCell(getIRDCell("Phulparash,Dist-Madhubani,Bihar-847409"));
+			if (null != user.getAddress()) {
+				 irdTable.addCell(getIRDCell(user.getAddress()));
+			} else  {
+				 irdTable.addCell(getIRDCell("Phulparash,Dist-Madhubani,Bihar-847409"));
+			}
 			irdTable.addCell(getIRDCell("Mobile :: " + user.getMobile()));
 			if (null != user.getEmail())
 				irdTable.addCell(getIRDCell("Email  :: " + user.getEmail()));
